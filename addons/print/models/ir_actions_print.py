@@ -51,7 +51,7 @@ class IrActionsPrint(models.Model):
             # the strategy model must produce print strategies
             printer = strategy.printer_id
             report = strategy.report_id
-            records = strategy.records(obj)
+            records = strategy.records(obj, report)
             # print
             printer.spool_report(records.ids, report)
 
@@ -114,6 +114,6 @@ class PrintStrategy(models.Model):
         return True
 
     @api.multi
-    def records(self, obj):
+    def records(self, obj, report):
         """Return the records to render for context `obj`."""
         return obj
